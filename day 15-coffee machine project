@@ -1,0 +1,181 @@
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 100,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 150,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 190,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+space="\n"*3
+total_money = 0
+resources["cost"] = total_money
+machine_state=True
+while machine_state==True:
+    customer_request = input("Welcome buddy! \nEspresso : ₹100 \nlatte : ₹150 \nccappuccino : ₹190  \nWhat would you like ? (espresso/latte/cappuccino) : ")
+    if customer_request == "report":
+        for each_value in resources:
+            print(f"{each_value} : {resources[each_value]}")
+        print(space)
+
+
+    elif customer_request == "espresso":
+        customer_money = int(input("insert the money : "))
+        expresso_values = MENU["espresso"]
+        expresso_cost = expresso_values["cost"]
+        expresso_ingredients=expresso_values["ingredients"]
+
+        if expresso_cost>customer_money:
+            print("Sorry that's not enough money. Money refunded.")
+            print(space)
+
+
+        elif expresso_cost==customer_money:
+            if expresso_ingredients["water"]<= resources["water"] and expresso_ingredients ["coffee"]<=resources["coffee"]:
+                print("Enjoy your espresso ☕")
+                resources["cost"]+=expresso_cost
+                reduced_water=resources["water"]-expresso_ingredients["water"]
+                resources["water"]= reduced_water
+                reduced_coffee=resources["coffee"]-expresso_ingredients["coffee"]
+                resources["coffee"]= reduced_coffee
+                print(space)
+            else:
+                print("SORRY! The resources are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+        elif expresso_cost<=customer_money:
+            if expresso_ingredients["water"]<= resources["water"] and expresso_ingredients ["coffee"]<=resources["coffee"]:
+                resources["cost"]+=expresso_cost
+                change=customer_money-expresso_cost
+                print(f"Here is your change ₹{change} \nEnjoy your espresso ☕")
+                reduced_water=resources["water"]-expresso_ingredients["water"]
+                resources["water"]= reduced_water
+                reduced_coffee=resources["coffee"]-expresso_ingredients["coffee"]
+                resources["coffee"]= reduced_coffee
+                print(space)
+
+            else:
+                print("SORRY! The resources are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+
+    elif customer_request == "latte":
+        customer_money = int(input("insert the money : "))
+        latte_values = MENU["latte"]
+        latte_cost = latte_values["cost"]
+        latte_ingredients = latte_values["ingredients"]
+
+        if latte_cost > customer_money:
+            print("Sorry that's not enough money. Money refunded.")
+            print(space)
+
+
+        elif latte_cost == customer_money:
+            if latte_ingredients["water"] <= resources["water"] and latte_ingredients["coffee"] <= resources["coffee"] and latte_ingredients["milk"]<resources["milk"]:
+                print("Enjoy your latte ☕")
+                resources["cost"]+=latte_cost
+                reduced_water = resources["water"] - latte_ingredients["water"]
+                resources["water"] = reduced_water
+                reduced_coffee = resources["coffee"] - latte_ingredients["coffee"]
+                resources["coffee"] = reduced_coffee
+                reduced_milk= resources["milk"]-latte_ingredients["milk"]
+                resources["milk"]=reduced_milk
+                print(space)
+
+            else:
+                print("SORRY! The resources are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+        elif latte_cost <= customer_money:
+            if latte_ingredients["water"] <= resources["water"] and latte_ingredients["coffee"] <= resources["coffee"] and latte_ingredients["milk"]<=resources["milk"]:
+                change=customer_money-latte_cost
+                print(f"Your change ₹{change}\nEnjoy your latte ☕")
+                resources["cost"] += latte_cost
+                reduced_water = resources["water"] - latte_ingredients["water"]
+                resources["water"] = reduced_water
+                reduced_coffee = resources["coffee"] - latte_ingredients["coffee"]
+                resources["coffee"] = reduced_coffee
+                reduced_milk= resources["milk"]-latte_ingredients["milk"]
+                resources["milk"]= reduced_milk
+                print(space)
+
+            else:
+                print("SORRY! The resources are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+
+    elif customer_request == "cappuccino":
+        customer_money = int(input("insert the money : "))
+        cappuccino_values = MENU["cappuccino"]
+        cappuccino_cost = cappuccino_values["cost"]
+        cappuccino_ingredients = cappuccino_values["ingredients"]
+
+        if cappuccino_cost > customer_money:
+            print("Sorry that's not enough money. Money refunded.")
+            print(space)
+
+
+        elif cappuccino_cost == customer_money:
+            if cappuccino_ingredients["water"] <= resources["water"] and cappuccino_ingredients["coffee"] <= resources["coffee"] and \
+                    cappuccino_ingredients["milk"] < resources["milk"]:
+                print("Enjoy your cappuccino ☕")
+                resources["cost"] += cappuccino_cost
+                reduced_water = resources["water"] - cappuccino_ingredients["water"]
+                resources["water"] = reduced_water
+                reduced_coffee = resources["coffee"] - cappuccino_ingredients["coffee"]
+                resources["coffee"] = reduced_coffee
+                reduced_milk = resources["milk"] - cappuccino_ingredients["milk"]
+                resources["milk"] = reduced_milk
+                print(space)
+
+            else:
+                print("SORRY! The resources needed are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+        elif cappuccino_cost <= customer_money:
+            if cappuccino_ingredients["water"] <= resources["water"] and cappuccino_ingredients["coffee"] <= resources["coffee"] and \
+                    cappuccino_ingredients["milk"] < resources["milk"]:
+                change = customer_money - cappuccino_cost
+                resources["cost"] += cappuccino_cost
+                print(f"Your change ₹{change}\nEnjoy your cappuccino ☕")
+                reduced_water = resources["water"] - cappuccino_ingredients["water"]
+                resources["water"] = reduced_water
+                reduced_coffee = resources["coffee"] - cappuccino_ingredients["coffee"]
+                resources["coffee"] = reduced_coffee
+                reduced_milk = resources["milk"] - cappuccino_ingredients["milk"]
+                resources["milk"] = reduced_milk
+                print(space)
+
+            else:
+                print("SORRY! The resources are not refilled in our machine. MONEY REFUNDED")
+                print(space)
+
+
+    elif customer_request=="off":
+        machine_state=False
+
+    else:
+        print("you entered a wrong value")
+        print(space)
