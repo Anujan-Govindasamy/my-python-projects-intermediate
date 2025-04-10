@@ -1,0 +1,37 @@
+import turtle
+from turtle import Turtle,Screen
+import random
+
+race_on = False
+screen = Screen()
+screen.setup(500,400)
+user_bet = screen.textinput( "bet","which turtle are you choosing ! enter the colour ?")
+
+colours=["red","orange","yellow","green","blue","purple"]
+y_axis=[130,80,30,-20,-70,-120]
+player_list=["tim","tom","jerry","mike","mona","Grand Master Oogway"]
+
+for turtle_count in range(0,6):
+    player_list[turtle_count] = Turtle()
+    player_list[turtle_count].shape("turtle")
+    player_list[turtle_count].color(colours[turtle_count])
+    player_list[turtle_count].penup()
+    player_list[turtle_count].goto(x=-230, y=y_axis[turtle_count])
+
+if user_bet:
+    race_on=True
+
+while race_on==True:
+
+    for turtle in player_list:
+        if turtle.xcor() > 230:
+            winner=turtle.pencolor()
+            race_on=False
+            if winner==user_bet:
+                print(f"you've won! {winner} turtle is the winner")
+            else:
+                print(f"you've lost! {winner} turtle is the winner")
+        rand_movement=random.randint(1,10)
+        turtle.forward(rand_movement)
+
+screen.exitonclick()
